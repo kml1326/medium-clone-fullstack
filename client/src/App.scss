@@ -1,0 +1,99 @@
+.App {
+  text-align: center;
+}
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+.signup,
+.login {
+	box-sizing: border-box;
+	display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+	padding: 0 120px;
+	height: 100vh;
+	justify-content: center;
+	text-align: center;
+	font-family: sans-serif;
+}
+
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.center {
+	text-align: center;
+}
+.input {
+	height: 25px;
+	padding: 14px;
+	margin: 10px 0;
+	border-radius: 10px;
+	background: #ebe3e391;
+	border: none;
+  outline: none;
+}
+.btn {
+	background:rgba(103, 81, 113, 0.87);
+	color: white;
+	font-size: 1rem;
+	font-weight: 700;
+	padding: 15px 20px;
+	margin: 20px 0 10px 0;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.logo {
+  display: inline-block;
+  margin-left: 20px;
+  padding: 5px;
+  background: white;
+  color: rgba(9, 52, 62, 0.87);
+  font-weight: 800;
+  box-shadow: 1px 2px 4px 2px grey;
+    border-radius: 10px
+}
+.logo-text {
+  font-size: 1.4rem;
+}
+
+.link-btn {
+  color: rgba(9, 52, 62, 0.87);
+  background: white;
+  margin-right: 20px;
+}
+.userName-logo {
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.header {
+  background: rgba(128, 42, 169, 0.87);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.todo-list {
+  width: 40%;
+  margin: 0 auto;
+}
+li {
+  list-style: none;
+}
+.todo-item {
+  display: inline-block;
+  padding: 10px 20px;
+}
+.delete-todo {
+  color : rgb(134, 22, 22);
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 50px;
+}

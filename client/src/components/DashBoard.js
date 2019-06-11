@@ -1,80 +1,181 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { addTodoAction, displayTodosAction } from '../actions/actions';
+import React, {Component} from "react";
+import {
+    getAllPostsAction,
+    createPostAction,
+    updatePostAction
+} from "../actions/actions";
+import {connect} from "react-redux";
 
 class DashBoard extends Component {
-
-    state = {
-      todo : '',
-      currentUserTodosId : ''
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: "",
+            description: "",
+            body: "",
+            editPost: {},
+            editId: ""
+        };
     }
 
-componentWillMount() {
+    handleChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    };
+    handleEditChange = e => {
+        let name = e.target.name;
+        let value = e.target.value;
+        this.setState(state => {
+            return {
+                editPost: {
+                    ...state.editPost,
+                    [name]: value
+                }
+            };
+        });
+    };
 
-  // this.props.displayTodos(this.props.currentUser._id)
- this.props.dispatch(displayTodosAction(this.props.currentUser._id))
-    
+    handleCreate = e => {
+        e.preventDefault();
+        const {title, description, body, editId} = this.state;
+        const data = {
+            id: editId,
+            title,
+            description,
+            body
+        };
+        this.props.dispatch(createPostAction(data));
+        this.setState({
+            title: "",
+            description: "",
+            body: ""
+        });
+    };
 
-}
-  
+    handleUpdate = e => {
+        e.preventDefault();
+        const {title, description, body} = this.state.editPost;
+        const data = {
+            id: this.state.editId,
+            title,
+            description,
+            body
+        };
+        this.props.dispatch(updatePostAction(data));
+        this.setState({
+            editId: "",
+            editPost: {}
+        });
+    };
 
-  handleChange = (e) => {
-    this.setState({
-      todo : e.target.value
-    })
-  }
+    handleDelPost = id => {
+        fetch(`/posts/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                this.props.dispatch({
+                    type: "ALL_POSTS",
+                    data
+                });
+            });
+    };
 
-  handleClick = () => {
-    let obj = {
-      todo : this.state.todo,
-      done : false
+    handlePostEdit(obj) {
+        this.setState({editPost: {...obj}, editId: obj._id});
     }
-    this.props.addTodo(obj);
-  }
 
-  handleClickOnDelete = (e) => {
-    console.log(e.target.id)
-  }
-  
-render() {
-    const {currentUserTodos} = this.props;
-    console.log(currentUserTodos, "currentuserTodos")
+    componentWillMount = () => {
+        this.props.dispatch(getAllPostsAction());
+    };
 
-    return (
-      <div>
-        <div>
-          <input type="text" placeholder='ToDo' onChange={this.handleChange} />
-          <input type='submit' value='Add ToDo' onClick={this.handleClick} />
-        </div>
-        <ul className='todo-list'>
-        {
-          (currentUserTodos.length) ?
-            currentUserTodos.map((obj, i) => {
-              return <li key={i} className='todo-item'> {obj.todo} 
-                  <span className='delete-todo right' id={obj._id} onClick={this.handleClickOnDelete}>x</span>
-                </li>
-            })
-          : ''
-        }
-        </ul>
-      </div>
-    )
-  }
+    render() {
+        const {editId, title, description, body, editPost} = this.state;
+        return (
+            <div className="main">
+                <form className=" post-form col-1-2">
+                    <input
+                        type="text"
+                        name="objectId"
+                        className="input none"
+                        value={editId}
+                    />
+                    <input
+                        type="text"
+                        name="title"
+                        value={editId ? editPost.title : title}
+                        placeholder="title"
+                        className="input title-box"
+                        onChange={editId ? this.handleEditChange : this.handleChange}
+                    />
+                    <input
+                        type="text"
+                        name="description"
+                        value={editId ? editPost.description : description}
+                        placeholder="description"
+                        className="input desc-box"
+                        onChange={editId ? this.handleEditChange : this.handleChange}
+                    />
+                    <textarea
+                        className="text-area body-box"
+                        name="body"
+                        placeholder="write post"
+                        onChange={editId ? this.handleEditChange : this.handleChange}
+                        value={editId ? editPost.body : body}
+                    >
+            {editId ? editPost.body : body}
+          </textarea>
+                    <input
+                        type="submit"
+                        value={editId ? "Update Post" : "create Post"}
+                        placeholder=""
+                        className="btn"
+                        onClick={editId ? this.handleUpdate : this.handleCreate}
+                    />
+                </form>
+
+                <div className="post-list col-1-2">
+                    {this.props.posts.length
+                        ? this.props.posts.map(post => {
+                            if (post._id == editId) return null;
+                            return (
+                                <div key={post._id} className="post">
+                                    <a
+                                        href={`/posts/${post._id}`}
+                                        key={post._id}
+                                        className="post-title"
+                                    >
+                                        {post.title}
+                                    </a>
+                                    <span>
+                      <i
+                          className="fas fa-edit"
+                          onClick={() => this.handlePostEdit(post)}
+                      />
+                      <i
+                          className="fas fa-trash-alt"
+                          onClick={() => this.handleDelPost(post._id)}
+                      />
+                    </span>
+                                </div>
+                            );
+                        })
+                        : ""}
+                </div>
+            </div>
+        );
+    }
 }
-
 
 function mapStateToProps(state) {
-  return {
-    currentUser: state.currentUser ,
-    currentUserTodos: state.currentUserTodos 
-  }
-}
- 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-    addTodo : (data) => dispatch(addTodoAction(data)),
-  }
+    console.log(state, "state in  dash");
+    return {
+        posts: state.allPosts ? state.allPosts : []
+    };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashBoard) ;
+export default connect(mapStateToProps)(DashBoard);

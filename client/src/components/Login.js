@@ -32,9 +32,6 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(this.props)
-
     this.props.login(this.state).then(data => {
       if(data.user) {
         console.log('data', data)
@@ -71,7 +68,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  console.log(state, "state")
   if(state) {
       return {
         currentUser: state.currentUser,

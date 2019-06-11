@@ -18,7 +18,7 @@ class Header extends Component {
       <div className='header'>
         <Link to='/'>
           <span className='logo'>
-            <span className='logo-text'>ToDos</span>
+            <span className='logo-text'>Medium Clone</span>
           </span>
         </Link>
         <nav>

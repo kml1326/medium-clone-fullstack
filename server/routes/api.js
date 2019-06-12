@@ -1,15 +1,15 @@
-const express = require('express');
-const userController = require('../controllers/user.controller');
-const postController = require('../controllers/post.controller');
-const auth = require('../modules/auth');
+const express = require("express");
+const userController = require("../controllers/user.controller");
+const postController = require("../controllers/post.controller");
+const auth = require("../modules/auth");
 
 var router = express.Router();
 
-router.post('/signup', userController.signup);
+router.post("/signup", userController.signup);
 
-router.post('/login', userController.login);
+router.post("/login", userController.login);
 
-router.get('/isLoggedin', auth.isLoggedIn, userController.isLoggedIn)
+router.get("/isLoggedin", auth.isLoggedIn, userController.isLoggedIn);
 
 router.post("/create", postController.create);
 

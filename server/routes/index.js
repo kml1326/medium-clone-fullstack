@@ -1,26 +1,25 @@
-const express = require('express');
+const express = require("express");
 const Comment = require("../models/Comment");
 const Post = require("../models/Post");
 
 var router = express.Router();
 
-router.get('/', (req, res) => {
-  res.render('index');
+router.get("/", (req, res) => {
+  res.render("index");
 });
 
-router.get('/signup', (req, res) => {
-  res.render('index');
+router.get("/signup", (req, res) => {
+  res.render("index");
 });
 
-router.get('/dashboard', (req, res) => {
-  res.render('index');
+router.get("/dashboard", (req, res) => {
+  res.render("index");
 });
 
-router.get('/logout', (req, res) => {
+router.get("/logout", (req, res) => {
   req.session.destroy();
-  res.status(200).redirect('/')
+  res.status(200).redirect("/");
 });
-
 
 router.get("/create", (req, res) => {
   res.render("index");

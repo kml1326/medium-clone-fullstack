@@ -1,93 +1,93 @@
-import React, { Component } from 'react';
-import { 
-    getSinglePostAction,
-    createCommentAction,
-    getAllComments
-} from '../actions/actions';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import {
+  getSinglePostAction,
+  createCommentAction,
+  getAllComments
+} from "../actions/actions";
+import { connect } from "react-redux";
 
 class SinglePost extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            comment: "",
-            editComment: "",
-            editCommentId: ""
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      comment: "",
+      editComment: "",
+      editCommentId: ""
+    };
+  }
 
-    componentDidMount() {
-        const id = this.props.location.pathname.split("/")[2];
-        this.props.dispatch(getSinglePostAction(id));
-        this.props.dispatch(getAllComments(id));
-    }
+  componentDidMount() {
+    const id = this.props.location.pathname.split("/")[2];
+    this.props.dispatch(getSinglePostAction(id));
+    this.props.dispatch(getAllComments(id));
+  }
 
-    handleChange = e => {
-        this.setState({
-          [e.target.name]: e.target.value
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  handleComment = e => {
+    e.preventDefault();
+    if (!this.state.comment) return;
+    const data = {
+      id: this.props.post._id,
+      comment: this.state.comment
+    };
+    this.props.dispatch(createCommentAction(data));
+    this.setState({ comment: "" });
+  };
+
+  handleCommentEdit = id => {
+    this.setState({ editCommentId: id });
+  };
+
+  handleCommentEditDone = id => {
+    if (!this.state.editComment) {
+      this.setState({ editCommentId: "" });
+      return;
+    }
+    fetch(`/comment/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        postId: this.props.post._id,
+        comment: this.state.editComment
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.props.dispatch({
+          type: "ALL_CURRENT_COMMENTS",
+          data
         });
-      };
-    
-      handleComment = e => {
-        e.preventDefault();
-        if (!this.state.comment) return;
-        const data = {
-          id: this.props.post._id,
-          comment: this.state.comment
-        };
-        this.props.dispatch(createCommentAction(data));
-        this.setState({ comment: "" });
-      };
-    
-      handleCommentEdit = id => {
-        this.setState({ editCommentId: id });
-      };
-    
-      handleCommentEditDone = id => {
-        if (!this.state.editComment) {
-          this.setState({ editCommentId: "" });
-          return;
-        }
-        fetch(`/comment/${id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            postId: this.props.post._id,
-            comment: this.state.editComment
-          }
-        })
-          .then(res => res.json())
-          .then(data => {
-            this.props.dispatch({
-              type: "ALL_CURRENT_COMMENTS",
-              data
-            });
-            this.setState({
-              editComment: "",
-              editCommentId: ""
-            });
-          });
-      };
-    
-      handleDelComment = id => {
-        fetch(`/comment/${id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            postId: this.props.post._id
-          }
-        })
-          .then(res => res.json())
-          .then(data => {
-            this.props.dispatch({
-              type: "ALL_CURRENT_COMMENTS",
-              data
-            });
-          });
-      };
-    
-    render() {
-        const { post, comments } = this.props;
+        this.setState({
+          editComment: "",
+          editCommentId: ""
+        });
+      });
+  };
+
+  handleDelComment = id => {
+    fetch(`/comment/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        postId: this.props.post._id
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.props.dispatch({
+          type: "ALL_CURRENT_COMMENTS",
+          data
+        });
+      });
+  };
+
+  render() {
+    const { post, comments } = this.props;
     return (
       <div className="container">
         {post && (
@@ -172,16 +172,16 @@ class SinglePost extends Component {
         </div>
       </div>
     );
-    }
+  }
 }
 
 function mapStateToProps(state) {
-    if(state) {
-        return {
-            post: state.currentSinglePost,
-            comments: state.currentComments
-        };
-    }
+  if (state) {
+    return {
+      post: state.currentSinglePost,
+      comments: state.currentComments
+    };
+  }
 }
 
 export default connect(mapStateToProps)(SinglePost);

@@ -1,51 +1,48 @@
-import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
-import SignInLink from './links/SignInLink';
-import SignOutLink from './links/SignOutLink';
-import { getLoggedinUserData } from '../actions/actions';
+import React, { Component } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import SignInLink from "./links/SignInLink";
+import SignOutLink from "./links/SignOutLink";
+import { getLoggedinUserData } from "../actions/actions";
 
 class Header extends Component {
-
-  componentWillMount() {
-  }
+  componentWillMount() {}
 
   render() {
-
-  const link = (this.props.user) ? <SignOutLink /> : <SignInLink />
+    const link = this.props.user ? <SignOutLink /> : <SignInLink />;
 
     return (
-      <div className='header'>
-        <Link to='/'>
-          <span className='logo'>
-            <span className='logo-text'>Medium Clone</span>
+      <div className="header">
+        <Link to="/">
+          <span className="logo">
+            <span className="logo-text">Medium Clone</span>
           </span>
         </Link>
-        <nav>
-          { link }
-        </nav>
-        
+        <nav>{link}</nav>
       </div>
-    )
+    );
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getData : (data) => dispatch(getLoggedinUserData(data))
-  }
+    getData: data => dispatch(getLoggedinUserData(data))
+  };
 }
 
 function mapStateToProps(state) {
-  if(state) {
+  if (state) {
     return {
-      user : state.fetchedUserData.user
-    }
+      user: state.fetchedUserData.user
+    };
   } else {
     return {
-      user : state
-    }
+      user: state
+    };
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

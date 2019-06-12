@@ -24,7 +24,7 @@ class Signup extends Component {
 
   render() {
     console.log(this.props.message, "message");
-    if (this.props.message) return <Redirect to="/login" />;
+    if (this.props.message) return <Redirect to="/" />;
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="signup">

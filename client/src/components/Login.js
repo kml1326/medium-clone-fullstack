@@ -32,7 +32,6 @@ class Login extends Component {
     e.preventDefault();
     this.props.login(this.state).then(data => {
       if (data.user) {
-        console.log("data", data);
         this.props.dispatch({ type: "LOGIN_SUCCESS", data: data.user });
         this.context.router.history.push("/dashboard");
       } else {
@@ -42,7 +41,7 @@ class Login extends Component {
   };
 
   render() {
-    const { fetchedData, currentUser } = this.props;
+    const { fetchedData, currentUser, message } = this.props;
 
     return (
       <div>
@@ -61,6 +60,7 @@ class Login extends Component {
             className="input"
             onChange={this.handleChange}
           />
+          {message ? <label>{message}</label> : ""}
           <input
             type="submit"
             value="Login"
@@ -85,7 +85,8 @@ function mapStateToProps(state) {
   if (state) {
     return {
       currentUser: state.currentUser,
-      fetchedData: state.fetchedUserData.user
+      fetchedData: state.fetchedUserData.user,
+      message: state.message
     };
   } else {
     return {

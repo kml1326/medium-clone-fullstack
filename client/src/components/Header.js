@@ -9,7 +9,8 @@ class Header extends Component {
   componentWillMount() {}
 
   render() {
-    const link = this.props.user ? <SignOutLink /> : <SignInLink />;
+    const { user, currentUser } = this.props;
+    const link = user || currentUser ? <SignOutLink /> : <SignInLink />;
 
     return (
       <div className="header">
@@ -33,7 +34,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   if (state) {
     return {
-      user: state.fetchedUserData.user
+      user: state.fetchedUserData.user,
+      currentUser: state.currentUser
     };
   } else {
     return {

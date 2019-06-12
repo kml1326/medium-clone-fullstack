@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 
 class SignOutLink extends Component {
   render() {
-    const name = this.props.user.name;
+    const { user, currentUser } = this.props;
+    const name = currentUser ? currentUser.name : user.name;
     var sName = "";
     name.split(" ").forEach(element => {
       sName += element[0];
@@ -23,7 +24,8 @@ class SignOutLink extends Component {
 
 function mapStatettoProps(state) {
   return {
-    user: state.fetchedUserData.user
+    user: state.fetchedUserData.user,
+    currentUser: state.currentUser
   };
 }
 

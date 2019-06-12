@@ -103,7 +103,7 @@ class DashBoard extends Component {
             type="text"
             name="objectId"
             className="input none"
-            value={editId}
+            defaultValue={editId}
           />
           <input
             type="text"
@@ -132,7 +132,7 @@ class DashBoard extends Component {
           </textarea>
           <input
             type="submit"
-            value={editId ? "Update Post" : "create Post"}
+            defaultValue={editId ? "Update Post" : "create Post"}
             placeholder=""
             className="btn"
             onClick={editId ? this.handleUpdate : this.handleCreate}

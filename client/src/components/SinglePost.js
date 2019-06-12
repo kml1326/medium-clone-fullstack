@@ -181,6 +181,8 @@ function mapStateToProps(state) {
       post: state.currentSinglePost,
       comments: state.currentComments
     };
+  } else {
+    return {};
   }
 }
 

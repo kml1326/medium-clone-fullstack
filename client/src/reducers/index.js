@@ -4,7 +4,8 @@ const initState = {
   fetchedUserData: {},
   allPosts: null,
   currentSinglePost: null,
-  currentComments: null
+  currentComments: null,
+  message: ""
 };
 
 const rootReducer = (state = initState, action) => {
@@ -16,12 +17,14 @@ const rootReducer = (state = initState, action) => {
       };
     case "SIGNUP_ERR":
       return {
-        ...state
+        ...state,
+        message: action.data
       };
     case "LOGIN_SUCCESS":
       return {
         ...state,
-        currentUser: action.data
+        currentUser: action.data,
+        message: ""
       };
     case "LOGIN_ERR":
       return {

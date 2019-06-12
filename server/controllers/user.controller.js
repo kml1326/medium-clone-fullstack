@@ -16,14 +16,14 @@ module.exports = {
   },
 
   login: (req, res, next) => {
-    console.log(req.user, "req.user");
     passport.authenticate("local", function(err, user, info) {
-      console.log(err, user, info, "in passport authenticate");
       if (err) {
         return next(err);
       }
       if (!user) {
-        return res.status(401).send({ message: "No such user exists." });
+        return res
+          .status(401)
+          .send({ message: "Ple3ase Check User Name or Password" });
       }
       req.logIn(user, function(err) {
         if (err) {

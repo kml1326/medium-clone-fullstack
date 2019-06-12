@@ -88,7 +88,6 @@ export function getAllPostsAction() {
         fetch(`${apiUrl}/posts`)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data.length) {
                     dispatch({
                         type: "ALL_POSTS",
@@ -104,6 +103,15 @@ export function getSinglePostAction(id) {
     return dispatch => {
         fetch(`${apiUrl}/posts/${id}`)
             .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data) {
+                    dispatch({
+                        type: "SINGLE_POST",
+                        data
+                    });
+                }
+            })
     };
 }
 

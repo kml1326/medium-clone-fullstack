@@ -6,7 +6,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import DashBoard from './components/DashBoard';
 import Header from './components/Header';
-// import SinglePost from './components/SinglePost';
+import SinglePost from './components/SinglePost';
 import { getLoggedinUserData } from './actions/actions';
 
 
@@ -56,7 +56,7 @@ class App extends Component {
               <Route exact path='/' render={() => this.checkLogin() } />
               <Route path='/signup' component={Signup} />
               <Route path='/dashboard' render={() => this.checkAuth(<DashBoard />) } />
-              {/*<Route path="/posts/:id" component={SinglePost} />*/}
+              <Route path="/posts/:id" component={SinglePost} />
             </Switch>
           </div>
         </div>

@@ -28,12 +28,12 @@ class Signup extends Component {
     if(this.props.message) return <Redirect to='/login' /> ;
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type='text' name='name' placeholder='name' onChange={this.handleChange} />
-          <input type='text' name='userName' placeholder='userName' onChange={this.handleChange} />
-          <input type='email' name='email' placeholder='email' onChange={this.handleChange} />
-          <input type='password' name='password' placeholder='password' onChange={this.handleChange} />
-          <input type='submit' value='Sign Up' onClick={this.handleSubmit} />
+        <form onSubmit={this.handleSubmit} className='signup'>
+          <input type='text' name='name' placeholder='name' className='input' onChange={this.handleChange} />
+          <input type='text' name='userName' placeholder='userName' className='input' onChange={this.handleChange} />
+          <input type='email' name='email' placeholder='email' className='input' onChange={this.handleChange} />
+          <input type='password' name='password' placeholder='password' className='input' onChange={this.handleChange} />
+          <input type='submit' value='Sign Up' className='btn' onClick={this.handleSubmit} />
         </form>
       </div>
     )

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { loginAction } from '../actions/actions';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { getLoggedinUserData } from '../actions/actions';
 
 class Login extends Component {

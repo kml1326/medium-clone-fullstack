@@ -70,7 +70,6 @@ class SinglePost extends Component {
       };
     
       handleDelComment = id => {
-        console.log("id", id, `/comment/${id}`);
         fetch(`/comment/${id}`, {
           method: "DELETE",
           headers: {
@@ -177,7 +176,6 @@ class SinglePost extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state, "state")
     if(state) {
         return {
             post: state.currentSinglePost,

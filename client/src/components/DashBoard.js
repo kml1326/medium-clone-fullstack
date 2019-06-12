@@ -23,6 +23,7 @@ class DashBoard extends Component {
             [e.target.name]: e.target.value
         });
     };
+
     handleEditChange = e => {
         let name = e.target.name;
         let value = e.target.value;
@@ -172,7 +173,6 @@ class DashBoard extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state, "state in  dash");
     return {
         posts: state.allPosts ? state.allPosts : []
     };

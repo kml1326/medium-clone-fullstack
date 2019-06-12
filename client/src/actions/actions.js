@@ -99,12 +99,10 @@ export function getAllPostsAction() {
 }
 
 export function getSinglePostAction(id) {
-    console.log(id, "in action 1");
     return dispatch => {
         fetch(`${apiUrl}/posts/${id}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data) {
                     dispatch({
                         type: "SINGLE_POST",
@@ -117,7 +115,7 @@ export function getSinglePostAction(id) {
 
 export function createCommentAction(data) {
     return dispatch => {
-        fetch(`${baseUrl}/posts/${data.id}/comment`, {
+        fetch(`${apiUrl}/posts/${data.id}/comment`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

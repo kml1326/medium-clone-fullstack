@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class SignInLink extends Component {
   render() {
     return (

@@ -1,0 +1,107 @@
+@import './post.scss';
+
+.App {
+  text-align: center;
+}
+
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.signup,
+.login {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+  padding: 0 120px;
+  height: 100vh;
+  justify-content: center;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.center {
+  text-align: center;
+}
+
+.btn {
+  background: #272728de;
+  width: 150px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 15px 20px;
+  margin: 20px 0 10px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  &:hover {
+    background: #030303de;
+  }
+}
+
+.logo {
+  display: inline-block;
+  margin-left: 20px;
+  padding: 5px;
+  color:#fff;
+  font-weight: 800;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.logo-text {
+  font-size: 1.4rem;
+}
+
+.link-btn {
+  color: rgba(9, 52, 62, 0.87);
+  background: white;
+  margin-right: 20px;
+  &:hover {
+    background: white;
+    color: rgba(9, 52, 62, 0.87);
+  }
+}
+
+.userName-logo {
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.header {
+  background: #111111b8;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.none {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #1aa5cf;
+}
+

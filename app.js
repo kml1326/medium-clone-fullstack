@@ -8,11 +8,10 @@ const passport = require("passport");
 const cors = require("cors");
 const path = require("path");
 
-const port = 8000;
+const port = process.env.PORT || 8000;
 
-mongoose.connect(
-  "mongodb://localhost/blog-post",
-  { useNewUrlParser: true },
+mongoose.connect(process.env.MONGODB_URI ||
+  "mongodb://user:kml1326JAISWAL@ds263848.mlab.com:63848/heroku_c0thnq7r",
   function(err, connection) {
     if (err) throw err;
     else console.log("connected to mongodb");

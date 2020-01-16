@@ -1,23 +1,42 @@
 {
-  "name": "todo-fullstack",
+  "name": "blog-post",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=development nodemon app.js"
+    "start": "node dist/server.prod.bundle.js",
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:server": "webpack --config webpack.server.js --watch",
+    "dev:express": "node dist/server.bundle.js",
+    "dev:client": "webpack --config webpack.client.js --watch",
+    "build:client": "webpack --config webpack.client.prod.js",
+    "build:server": "webpack --config webpack.server.prod.js",
+    "build": "npm-run-all --parallel build:*"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "ReactJs",
+    "Redux",
+    "NodeJs",
+    "ExpressJs",
+    "MongoDB"
+  ],
+  "author": "kml1326",
+  "license": "MIT",
+  "homepage": "https://github.com/kml1326/gup-sup#readme",
   "dependencies": {
     "bcrypt": "^3.0.2",
+    "clean-webpack-plugin": "^3.0.0",
     "connect-mongo": "^2.0.3",
     "cors": "^2.8.5",
     "ejs": "^2.6.1",
+    "ejs-loader": "^0.3.5",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "jsdom": "^16.0.0",
     "mongoose": "^5.4.0",
     "nodemon": "^1.18.9",
+    "npm-run-all": "^4.1.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "react": "^16.6.3",
@@ -26,13 +45,15 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/preset-react": "^7.0.0",
     "css-loader": "^2.0.0",
     "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
@@ -40,6 +61,7 @@
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-middleware": "^3.4.0",
-    "webpack-hot-middleware": "^2.24.3"
+    "webpack-hot-middleware": "^2.24.3",
+    "webpack-merge": "^4.2.2"
   }
 }

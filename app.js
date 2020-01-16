@@ -11,7 +11,7 @@ const path = require("path");
 const port = 8000;
 
 mongoose.connect(
-  "mongodb://localhost/mediumClone-fullStack",
+  "mongodb://localhost/blog-post",
   { useNewUrlParser: true },
   function(err, connection) {
     if (err) throw err;
@@ -22,21 +22,22 @@ mongoose.connect(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join('dist')));
 
 app.set("views", path.join(__dirname, "./server/views"));
 app.set("view engine", "ejs");
 
 app.use(
   session({
-    secret: "toDo fullStack",
+    secret: "blog-post",
     resave: true,
     saveUninitialized: true,
     cookie: {
       maxAge: 3600000
     },
     store: new MongoStore({
-      url: "mongodb://localhost/mediumClone-fullStack-session"
+      url: "mongodb://localhost/blog-post-session"
     })
   })
 );

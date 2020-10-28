@@ -28,7 +28,7 @@
   "license": "MIT",
   "homepage": "https://github.com/kml1326/gup-sup#readme",
   "dependencies": {
-    "bcrypt": "^3.0.2",
+    "bcrypt": "^5.0.0",
     "clean-webpack-plugin": "^3.0.0",
     "connect-mongo": "^2.0.3",
     "cors": "^2.8.5",
